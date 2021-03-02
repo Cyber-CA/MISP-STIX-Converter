@@ -93,6 +93,7 @@ class MISP(object):
           :param analysis: How far are we through analysis? [0-3, 3 highest]
           :param tags: The tags to assign the new event.
           :param verified: Is the event verified? Default False.
+          :param published: Should the event be published on the destination MISP server? Default True
         """
 
         # If we've been given a list, push each in turn

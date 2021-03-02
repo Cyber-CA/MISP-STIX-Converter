@@ -221,8 +221,12 @@ def STIXtoMISP(stix, mispAPI, **kwargs):
     if misp_event.attributes:
         log.debug("Attributes exist. Pushing...")
         if mispAPI:
+            event = json.dumps(misp_event, cls=MISPEncode)
+            event["published"] = kwargs.pop('published', True)
+
             response = mispAPI.add_event(
-                json.dumps(misp_event, cls=MISPEncode))
+                event
+            )
             if response.get('errors'):
                 raise Exception("PACKAGE: {}\nERROR: {}".format(
                     json.dumps(misp_event, cls=MISPEncode),
